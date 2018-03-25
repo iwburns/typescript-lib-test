@@ -65,7 +65,7 @@ class Some<T> extends OptionT<T> {
   }
 }
 
-class None<T> extends OptionT<T> {
+class None extends OptionT<any> {
   constructor() {
     super();
   }

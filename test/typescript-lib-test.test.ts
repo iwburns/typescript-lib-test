@@ -31,4 +31,27 @@ describe("OptionT", () => {
     expect(cThing.isSome()).toBe(false);
     expect(cThing.isNone()).toBe(true);
   });
+
+  it("some and none have compatible types", () => {
+    function get<T>(key: String): OptionT<T> {
+      if (key === 'foo') {
+        return OptionT.some('bar');
+      } else if (key === 'num') {
+        return OptionT.some(5);
+      }
+      return OptionT.none();
+    }
+
+    let bar = get('foo');
+    expect(bar.isSome()).toBe(true);
+    expect(bar.isNone()).toBe(false);
+
+    let qux = get('baz');
+    expect(qux.isSome()).toBe(false);
+    expect(qux.isNone()).toBe(true);
+
+    let five = get('num');
+    expect(five.isSome()).toBe(true);
+    expect(five.isNone()).toBe(false);
+  });
 });
